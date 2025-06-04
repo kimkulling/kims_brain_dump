@@ -1,4 +1,8 @@
 # My developer jornal
+## 06-04-2025
+- I made some refactorings in the CanvasRenderer in the OSRE-Repo
+- The main page of the Open-Collective page got an update
+  
 ## 06-03-2025
 - I wrote my first Scratch allocator, which can be used for all kind of classes by using implplacement new / deletes.
 - Today I tried the google library benchmark to play with performance tests in assimp.
