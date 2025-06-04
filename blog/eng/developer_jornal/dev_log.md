@@ -1,4 +1,4 @@
-# My developer jornal
+# My developer journal
 ## 06-04-2025
 - I made some refactorings in the CanvasRenderer in the OSRE-Repo
 - The main page of the Open-Collective page got an update
