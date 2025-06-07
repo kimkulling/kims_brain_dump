@@ -1,6 +1,6 @@
 # My developer journal
 ## 06-07-2025
-- I trying to fix the update of the pugixml dependency in assimp. If you want to do the same some findings from me:
+- I tried to fix the update of the pugixml dependency in assimp. If you want to do the same some findings from me:
   - They have added a cpp file, add this to you build environment
   - You need to enable the export for dlls on windows manually, but you need to take case if you are using windows or not
 - I started to integrate the freetype lib as a workaroud in my OSRE renderer. I want to be able to provide a simple UI for
