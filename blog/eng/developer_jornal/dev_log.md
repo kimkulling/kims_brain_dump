@@ -1,4 +1,15 @@
 # My developer journal
+## 06-07-2025
+- I trying to fix the update of the pugixml dependency in assimp. If you want to do the same some findings from me:
+  - They have added a cpp file, add this to you build environment
+  - You need to enable the export for dlls on windows manually, but you need to take case if you are using windows or not
+- I started to integrate the freetype lib as a workaroud in my OSRE renderer. I want to be able to provide a simple UI for
+  importing assets. Unfortunately putting an image or a text onto my button stiil does not work  
+
+## 06-06-2025
+- I closed the rework on the Canvas-elements - it broke the 2D rendering and I was too excausted to start debugging - maybe not the best decision
+- I start to fix the Debug-Renderer in the OSRE
+- 
 ## 06-04-2025
 - I made some refactorings in the CanvasRenderer in the OSRE-Repo
 - The main page of the Open-Collective page got an update
