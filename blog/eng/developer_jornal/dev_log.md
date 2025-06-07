@@ -4,7 +4,8 @@
   - They have added a cpp file, add this to you build environment
   - You need to enable the export for dlls on windows manually, but you need to take case if you are using windows or not
 - I started to integrate the freetype lib as a workaroud in my OSRE renderer. I want to be able to provide a simple UI for
-  importing assets. Unfortunately putting an image or a text onto my button stiil does not work  
+  importing assets. Unfortunately putting an image or a text onto my button stiil does not work
+- I installed Unreal-Engine for the first time. It is such a biiiiiig project ...
 
 ## 06-06-2025
 - I closed the rework on the Canvas-elements - it broke the 2D rendering and I was too excausted to start debugging - maybe not the best decision
