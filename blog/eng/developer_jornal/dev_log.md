@@ -1,8 +1,18 @@
 # My developer journal
 ## 06-07-2025
 - I tried to fix the update of the pugixml dependency in assimp. If you want to do the same some findings from me:
-  - They have added a cpp file, add this to you build environment
-  - You need to enable the export for dlls on windows manually, but you need to take case if you are using windows or not
+  - They have added a cpp file, add this to you build environment. The old way will not work anymore.
+  - You need to enable the export for dlls on windows manually, but you need to take case if you are using windows or not.
+    Check the config header for this:
+
+```cpp
+#ifdef _WIN32
+#   define PUGIXML_API __declspec(dllexport) // to export all public symbols from DLL
+#else
+#  define PUGIXML_API __attribute__((visibility("default")))
+#endif // _WIN32
+```
+
 - I started to integrate the freetype lib as a workaroud in my OSRE renderer. I want to be able to provide a simple UI for
   importing assets. Unfortunately putting an image or a text onto my button stiil does not work
 - I installed Unreal-Engine for the first time. It is such a biiiiiig project ...
