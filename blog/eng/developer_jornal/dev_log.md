@@ -1,4 +1,10 @@
 # My developer journal
+## 06-09-2025
+- I prepared the installer for the Asset-Importer-SDK. it is now available on itchi.io.
+
+## 06-08-2025
+- The Asset-Importer-Lib v6.0.2 s out. And I adapted all my homes in the internet.
+
 ## 06-07-2025
 - I tried to fix the update of the pugixml dependency in assimp. If you want to do the same some findings from me:
   - They have added a cpp file, add this to you build environment. The old way will not work anymore.
