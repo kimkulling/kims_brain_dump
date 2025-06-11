@@ -2,7 +2,7 @@
 ## 06-11-2025
 - I played a little bit with the debug renderer in the OSRE. As usual I was not able to concentrate on a
   dedicated fix ... in the beginning. At the end I recognized: I introduced a render path interface, I
-  used it to implement the Cancas-renderer. But I missed the point when any kind of instance or service
+  used it to implement the Canvas-renderer. But I missed the point when any kind of instance or service
   iterates through all the different renderpaths to ensure that their rendering gets performed during the frame update.
   I guess I need to add this.
 
