@@ -1,4 +1,14 @@
 # My developer journal
+## 06-11-2025
+- I played a little bit with the debug renderer in the OSRE. As usual I was not able to concentrate on a
+  dedicated fix ... in the beginning. At the end I recognized: I introduced a render path interface, I
+  used it to implement the Cancas-renderer. But I missed the point when any kind of instance or service
+  iterates through all the different renderpaths to ensure that their rendering gets performed during the frame update.
+  I guess I need to add this.
+
+## 06-10-2025
+- The documentation for the Asset-Importer-b got an update to **v6.0.2**
+  
 ## 06-09-2025
 - I prepared the installer for the Asset-Importer-SDK. it is now available on itchi.io.
 
