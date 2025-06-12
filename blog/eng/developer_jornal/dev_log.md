@@ -1,4 +1,9 @@
 # My developer journal
+## 06-12-2025
+- I took a deeper look inside the initial allocations in the OSRE. Most of them are done by Constant Strings using a std::string.
+  I guess I should replace them by a null-terminated constexpr char array. And all the shader code are stored in static
+  std::strings. Not the best idea for buildin shaders.
+  
 ## 06-11-2025
 - I played a little bit with the debug renderer in the OSRE. As usual I was not able to concentrate on a
   dedicated fix ... in the beginning. At the end I recognized: I introduced a render path interface, I
