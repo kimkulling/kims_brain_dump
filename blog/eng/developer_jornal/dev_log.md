@@ -41,7 +41,7 @@
 ## 06-06-2025
 - I closed the rework on the Canvas-elements - it broke the 2D rendering and I was too excausted to start debugging - maybe not the best decision
 - I start to fix the Debug-Renderer in the OSRE
-- 
+
 ## 06-04-2025
 - I made some refactorings in the CanvasRenderer in the OSRE-Repo
 - The main page of the Open-Collective page got an update
