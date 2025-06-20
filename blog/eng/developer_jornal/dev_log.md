@@ -1,4 +1,15 @@
 # My developer journal
+## 06-20-2025
+- Sometimes it makes sense to rethink all the stuff you have done in the past. Currently I am rethinking the way my old renderer in the OSRE works.
+  My plan was to have a separate renderthread and push all the new stuff from the main thread to the new one. So far so good. But with the time I
+  recognized that when creating a renderer in a separate thread you need to set it up from your main thread. Getting it up means creating an
+  interface on the main thread side and push all the data to the backend side. After the years this has basicly doubled all
+  interfaces - in both threads.
+
+## 06-19-2025
+- I fixed some minor things in my cppcore lib. Mostly upper/lowercase issues
+- The way I wrote the string class seems to be wrong because I never used it.
+  
 ## 06-12-2025
 - I took a deeper look inside the initial allocations in the OSRE. Most of them are done by Constant Strings using a std::string.
   I guess I should replace them by a null-terminated constexpr char array. And all the shader code are stored in static
