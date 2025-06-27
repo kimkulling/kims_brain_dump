@@ -1,4 +1,9 @@
 # My developer journal
+## 06-27-2025
+- I searched for good ways to structurized a new vulkan renderer. In special I was interested how to run it: in the main thread or in a separate
+  render thread. I am still investigating this question. I guess toing this decision is not so easy, because there are a lot of between thread
+  concepts I haven't evaluated until now. And I want to avoid to do the same mistaakes as I did in my OSRE.
+  
 ## 06-20-2025
 - Sometimes it makes sense to rethink all the stuff you have done in the past. Currently I am rethinking the way my old renderer in the OSRE works.
   My plan was to have a separate renderthread and push all the new stuff from the main thread to the new one. So far so good. But with the time I
