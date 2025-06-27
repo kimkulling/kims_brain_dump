@@ -3,6 +3,14 @@
 - I searched for good ways to structurized a new vulkan renderer. In special I was interested how to run it: in the main thread or in a separate
   render thread. I am still investigating this question. I guess toing this decision is not so easy, because there are a lot of between thread
   concepts I haven't evaluated until now. And I want to avoid to do the same mistaakes as I did in my OSRE.
+## ß6-25-2025
+- I worked on a PR (thanks to https://github.com/HandsomeXi) fixing memory leaks in the texture transform post-processing step. I tried to optimize
+  his solution and I failed. He just used a copy-constructed unique-ptr from the STL. I tried the make_unique and failed to deduct the currect type.
+- Always try to make things better can make things much buggier.
+
+## 06-24-2025
+- I optimized the GeometricTools. I have avoided some possible crashes.
+- Maybe I should try to used SIMD stuff on the assimp vector arithmetics.
   
 ## 06-20-2025
 - Sometimes it makes sense to rethink all the stuff you have done in the past. Currently I am rethinking the way my old renderer in the OSRE works.
