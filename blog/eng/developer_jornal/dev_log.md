@@ -1,4 +1,11 @@
 # My developer journal
+## 07-01-2025
+- The new concept for strings in my cppcore library (see https://github.com/kimkulling/cppcore) is ready for merging. IN this moment the features are not
+  too bad:
+  - Small string representation on the stack to avoid allocations during construction
+  - Fast string comparison by hash checks instead of deep checks
+  - I have introduced a string view class
+- The assimp library is now part of the bazel registry: https://github.com/bazelbuild/bazel-central-registry/tree/main/modules/assimp
 ## 06-27-2025
 - I searched for good ways to structurized a new vulkan renderer. In special I was interested how to run it: in the main thread or in a separate
   render thread. I am still investigating this question. I guess toing this decision is not so easy, because there are a lot of between thread
