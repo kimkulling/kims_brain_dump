@@ -1,4 +1,10 @@
 # My developer journal
+## 07-05-2025
+- Using vcpkg, SDL2 and Vulkan is more complicated than expected. I tried to load all the needed vulkan-libs and render a simple triangle. To optimize
+  the way to set it up I installes SDL2 and volk by using vcpkg. unfortunately, nothing worked. The SLS2-stuff told me that the co9nfiguration of the
+  Vulkan loading was not successful. Volks initialization calls told me: We are fine. My impacient told me to kill them all. But I didn't listening to them.
+## 07-04-2025
+- I took a look onto my old fe-solver for beam structures. I want to have it in a working state again.
 ## 07-01-2025
 - The new concept for strings in my cppcore library (see https://github.com/kimkulling/cppcore) is ready for merging. IN this moment the features are not
   too bad:
