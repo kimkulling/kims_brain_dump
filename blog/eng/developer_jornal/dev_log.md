@@ -1,4 +1,9 @@
 # My developer journal
+## 07-21-2025
+- I added a logger to the cppcore lib.
+- I found a strange issue in the unittests of the Asset-Importer-Lib: when running a unittest to evaluate a out-of-bounds issue in the Halflife-Model-Importer the memory sanitizer told me that a access-after-free was detected. The implementation of the asset-importer-import class was reused after free. Unfortunately the importer was allocated on the stack and my expectation was that the release of the importer will release the implementation as well. So I am still investigating this.
+## 07-20.2025
+- I worked on a fix for an out-of-bounds-access vulnerability in the Asset-Importer-Lib. And getting the fix is easy. Getting a working test for the behavior get hard.
 ## 07-05-2025
 - Using vcpkg, SDL2 and Vulkan is more complicated than expected. I tried to load all the needed vulkan-libs and render a simple triangle. To optimize
   the way to set it up I installes SDL2 and volk by using vcpkg. unfortunately, nothing worked. The SLS2-stuff told me that the co9nfiguration of the
