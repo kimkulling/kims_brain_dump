@@ -1,4 +1,7 @@
 # My developer journal
+## 07-23-2025
+- I fought a little bit with a c++ based json library. I wrote a post about that which you can find here:
+  - [Fighting with JSON — A War Story](https://kim-kulling.medium.com/fighting-with-json-a-war-story-2967e295855a)
 ## 07-21-2025
 - I added a logger to the cppcore lib.
 - I found a strange issue in the unittests of the Asset-Importer-Lib: when running a unittest to evaluate a out-of-bounds issue in the Halflife-Model-Importer the memory sanitizer told me that a access-after-free was detected. The implementation of the asset-importer-import class was reused after free. Unfortunately the importer was allocated on the stack and my expectation was that the release of the importer will release the implementation as well. So I am still investigating this.
