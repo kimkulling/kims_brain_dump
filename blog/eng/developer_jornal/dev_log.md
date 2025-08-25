@@ -1,18 +1,26 @@
 # My developer journal
+## 08-25-2025
+- I am back from vacations. In the Open-Asser-Importr we have 29 open Pull-Requests. I am really happy to see all your great support. I will start working on that.
+  
 ## 07-23-2025
 - I fought a little bit with a c++ based json library. I wrote a post about that which you can find here:
   - [Fighting with JSON — A War Story](https://kim-kulling.medium.com/fighting-with-json-a-war-story-2967e295855a)
+
 ## 07-21-2025
 - I added a logger to the cppcore lib.
 - I found a strange issue in the unittests of the Asset-Importer-Lib: when running a unittest to evaluate a out-of-bounds issue in the Halflife-Model-Importer the memory sanitizer told me that a access-after-free was detected. The implementation of the asset-importer-import class was reused after free. Unfortunately the importer was allocated on the stack and my expectation was that the release of the importer will release the implementation as well. So I am still investigating this.
+ 
 ## 07-20.2025
 - I worked on a fix for an out-of-bounds-access vulnerability in the Asset-Importer-Lib. And getting the fix is easy. Getting a working test for the behavior get hard.
+
 ## 07-05-2025
 - Using vcpkg, SDL2 and Vulkan is more complicated than expected. I tried to load all the needed vulkan-libs and render a simple triangle. To optimize
   the way to set it up I installes SDL2 and volk by using vcpkg. unfortunately, nothing worked. The SLS2-stuff told me that the co9nfiguration of the
   Vulkan loading was not successful. Volks initialization calls told me: We are fine. My impacient told me to kill them all. But I didn't listening to them.
+
 ## 07-04-2025
 - I took a look onto my old fe-solver for beam structures. I want to have it in a working state again.
+
 ## 07-01-2025
 - The new concept for strings in my cppcore library (see https://github.com/kimkulling/cppcore) is ready for merging. IN this moment the features are not
   too bad:
@@ -20,10 +28,12 @@
   - Fast string comparison by hash checks instead of deep checks
   - I have introduced a string view class
 - The assimp library is now part of the bazel registry: https://github.com/bazelbuild/bazel-central-registry/tree/main/modules/assimp
+
 ## 06-27-2025
 - I searched for good ways to structurized a new vulkan renderer. In special I was interested how to run it: in the main thread or in a separate
   render thread. I am still investigating this question. I guess toing this decision is not so easy, because there are a lot of between thread
   concepts I haven't evaluated until now. And I want to avoid to do the same mistaakes as I did in my OSRE.
+
 ## ß6-25-2025
 - I worked on a PR (thanks to https://github.com/HandsomeXi) fixing memory leaks in the texture transform post-processing step. I tried to optimize
   his solution and I failed. He just used a copy-constructed unique-ptr from the STL. I tried the make_unique and failed to deduct the currect type.
