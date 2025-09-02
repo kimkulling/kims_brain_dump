@@ -1,4 +1,11 @@
 # My developer journal
+## 09-01-2025
+- Finally I was able to finish my vulkan renderer. The first model shall be just one triangle. And it doesn't work right now.
+
+## 08-29-2025
+- I was able to close some of the open security vulerabilities in the Asset-Importer-Lib.
+- We have an ongoing discussion regarding the best way how to deal with epics and issues. Results are currently not there.
+
 ## 08-25-2025
 - I am back from vacations. In the Open-Asser-Importr we have 29 open Pull-Requests. I am really happy to see all your great support. I will start working on that.
   
