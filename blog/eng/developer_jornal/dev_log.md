@@ -1,4 +1,10 @@
 # My developer journal
+## 09-04-2025
+- For an embedded target we are working with dev-containers on Linux. As the IDE I am using vs-code. This works fine undtil Microsoft will change all
+  their infrastructure - again. So to get the right version we have to follow the documentation from MS (you can find it here: https://code.visualstudio.com/docs/setup/linux).
+  So when adapting this I added 2 gpg-signatures to my apt-based package manager. And this was causing a conflict. So I must remove this from the apt.list in /etc/apt.lists.d.
+  Unfortunately noone told me where t find this stuff. I hate this kind of issues.
+
 ## 09-01-2025
 - Finally I was able to finish my vulkan renderer. The first model shall be just one triangle. And it doesn't work right now.
 
