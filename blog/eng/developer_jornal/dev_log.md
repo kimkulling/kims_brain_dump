@@ -1,4 +1,9 @@
 # My developer journal
+## 09-10-2025
+- If you want to import your sonarcube findings in your IDE (special if this IDE is, ideed, vs-code) there is an easy to use plugin from sonarsource
+## 09-09-2025
+- Learned a lot about working with devcontainers using CLion or vscode. Seems to be a good alternative instead of using only docker for firmware development.
+- I just learned another fascinating thing: you can use wsl2 to work on a docker image directly
 ## 09-04-2025
 - For an embedded target we are working with dev-containers on Linux. As the IDE I am using vs-code. This works fine undtil Microsoft will change all
   their infrastructure - again. So to get the right version we have to follow the documentation from MS (you can find it here: https://code.visualstudio.com/docs/setup/linux).
