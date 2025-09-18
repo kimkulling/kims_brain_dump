@@ -1,4 +1,8 @@
 # My developer journal
+## 09-18-2025
+- Sonarcube findings helps you a lot to get a better understanding how old your software core is. After a while you will recognize pattern in your code which shows when the stuff was written.
+## 09-17-2025
+- I hate working with javascript. I guess I am just too stupid for it.
 ## 09-10-2025
 - If you want to import your sonarcube findings in your IDE (special if this IDE is, ideed, vs-code) there is an easy to use plugin from sonarsource
 ## 09-09-2025
