@@ -1,13 +1,23 @@
 # My developer journal
+## 09-24-2025
+- If you want to use your utility lib (mine is called cppcore) make sure that you have a clean integration ready for all external users.
+
+## 09-21-2025
+- I learned a lot abou using the coverage flags used by the clang- and the g++ compiler. If you want to get a nice to read statistic, use *gcovr*
+  
 ## 09-18-2025
 - Sonarcube findings helps you a lot to get a better understanding how old your software core is. After a while you will recognize pattern in your code which shows when the stuff was written.
+  
 ## 09-17-2025
 - I hate working with javascript. I guess I am just too stupid for it.
+  
 ## 09-10-2025
-- If you want to import your sonarcube findings in your IDE (special if this IDE is, ideed, vs-code) there is an easy to use plugin from sonarsource
+- If you want to import your sonarcube findings in your IDE (special if this IDE is, ideed, vs-code) there is an easy to use plugin from sonarsource.
+  
 ## 09-09-2025
 - Learned a lot about working with devcontainers using CLion or vscode. Seems to be a good alternative instead of using only docker for firmware development.
 - I just learned another fascinating thing: you can use wsl2 to work on a docker image directly
+  
 ## 09-04-2025
 - For an embedded target we are working with dev-containers on Linux. As the IDE I am using vs-code. This works fine undtil Microsoft will change all
   their infrastructure - again. So to get the right version we have to follow the documentation from MS (you can find it here: https://code.visualstudio.com/docs/setup/linux).
