@@ -1,4 +1,10 @@
 # My developer journal
+## 10-07-2025
+- Just learned that LLM will help us to do repetive tasks more easily. It will be still necessary to think about it.
+
+## 10-03-2025
+- I just updated my private website.
+
 ## 09-24-2025
 - If you want to use your utility lib (mine is called cppcore) make sure that you have a clean integration ready for all external users.
 
