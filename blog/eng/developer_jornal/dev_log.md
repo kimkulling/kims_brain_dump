@@ -1,9 +1,16 @@
 # My developer journal
+## 10-14-2025
+- I was able to finalize the first approach for a staging vertex buffer in SegFault.
+- Horray, finally I was able to release the homwork for my students.
+
+## 10-13-2025
+- The big PR for assimp was merged: it contains a lot of stuff to fix the sonarcube findings in assimp.
+  
 ## 10-07-2025
 - Just learned that LLM will help us to do repetive tasks more easily. It will be still necessary to think about it.
 
 ## 10-03-2025
-- I just updated my private website.
+- I just updated my private website. Looks a little bit nicer now and I have added more of my private content on it.
 
 ## 09-24-2025
 - If you want to use your utility lib (mine is called cppcore) make sure that you have a clean integration ready for all external users.
