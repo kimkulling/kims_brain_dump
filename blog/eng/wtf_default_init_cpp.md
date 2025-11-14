@@ -1,4 +1,4 @@
-# WTF: C++s Initialisierung macht mich fertig
+# WTF: C++ Initialization Is Driving Me Crazy
 ## What Happened?
 I finally took the time to clean up the public headers of the Open-Asset-Importer-Lib. Specifically, 
 I opened each header, tidied things up, added missing documentation, and "simplified" a few constructors
