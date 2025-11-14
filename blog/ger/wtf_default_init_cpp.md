@@ -72,7 +72,7 @@ AI_FORCE_INLINE LineSplitter::LineSplitter(StreamReaderLE& stream, bool skip_emp
 }
 ```
 
-Das Attribut mSwallol, welche den Default-Wert annehmen sollte, wurde durch meine Änderung implizit initialisiert. 
+Das Attribut mSwallow, welche den Default-Wert annehmen sollte, wurde durch meine Änderung implizit initialisiert. 
 Meiner Erwartung nach sollte sich daraus keine Änderung im Verhalten zeigen. Aber weit gefehlt! Statt wie erwartet war nun 
 der Default ein anderer: true statt false.
 
