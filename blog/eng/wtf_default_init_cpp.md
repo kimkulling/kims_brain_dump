@@ -80,4 +80,8 @@ Why did the default value change when I removed the explicit initialization from
 to change, but I was wrong. Lesson learned: Always make implicit assumptions explicit and easy to understand. Otherwise, 
 the world will burn.
 This behavior was observed with MSVC, g++, and clang++. There’s probably a reason in the C++ spec, but I spared myself 
-the trouble of looking it up.
+the trouble of looking it up. 
+
+## Update
+Not it get s obvious why this happened: my change added undefined behavior because I replaced a default initializer by doing nothing. 
+And this is, indeed, wrong! 
