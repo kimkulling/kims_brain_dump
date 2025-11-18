@@ -1,4 +1,7 @@
 # My developer journal
+## 10-16-2025
+- Fixing bugs to prevent security issue can be annoying.
+  
 ## 10-14-2025
 - I was able to finalize the first approach for a staging vertex buffer in SegFault.
 - Horray, finally I was able to release the homwork for my students.
