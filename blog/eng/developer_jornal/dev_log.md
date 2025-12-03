@@ -2,7 +2,7 @@
 ## 11-14-2025
 - I tried to update some small issues detected by Sonarcube. Mostly there were issues like
   - Move the initialization of this attribute out of the init-list from your constructor to its declaration". So I thought I fixed thad. But have a look by yourself: https://medium.com/the-wtf-collection/wtf-c-initialization-is-driving-me-crazy-c20c7d0f0442
-  -   
+
 ## 10-16-2025
 - Fixing bugs to prevent security issue can be annoying.
   
