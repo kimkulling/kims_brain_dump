@@ -1,4 +1,18 @@
 # My developer journal
+## 01-14-2026
+- I have finished my first certificate how to use **MCP** with an AI-agent. Nice to see how the USB for LLMs works.
+
+## 01-10-2026
+- The animation component in my experimental Render engine calles **OSRE** is now able to do simple animation for meshes.
+  - See [OSRE-project](https://github.com/kimkulling/osre).
+  - You can check the demo [Animation Sample](https://github.com/kimkulling/osre/tree/master/samples/05_Animation)
+
+## 01-01-2026
+- Happy new year to you all.
+
+## 12-19-2025
+- I was able to prepare a rotating quad in my vulkan toy engine.
+
 ## 11-14-2025
 - I tried to update some small issues detected by Sonarcube. Mostly there were issues like
   - Move the initialization of this attribute out of the init-list from your constructor to its declaration". So I thought I fixed thad. But have a look by yourself: https://medium.com/the-wtf-collection/wtf-c-initialization-is-driving-me-crazy-c20c7d0f0442
