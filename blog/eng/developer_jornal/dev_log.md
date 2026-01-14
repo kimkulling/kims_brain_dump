@@ -2,11 +2,17 @@
 ## 01-14-2026
 - I have finished my first certificate how to use **MCP** with an AI-agent. Nice to see how the USB for LLMs works.
 
+## 01-13-2026
+- Finally - I added the Assimp icon to the website - again.
+  
 ## 01-10-2026
 - The animation component in my experimental Render engine calles **OSRE** is now able to do simple animation for meshes.
   - See [OSRE-project](https://github.com/kimkulling/osre).
   - You can check the demo [Animation Sample](https://github.com/kimkulling/osre/tree/master/samples/05_Animation)
 
+## 01-02-2026
+- I merged a lot of the incoming ''PRs'' for the Open-Asset-Importer-Lib
+  
 ## 01-01-2026
 - Happy new year to you all.
 
