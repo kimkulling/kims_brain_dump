@@ -1,4 +1,34 @@
 # My developer journal
+
+## 03-06-2026
+- Today I stared to work with my Nukleus Developer Board with Zephyr. What I did so far were the common first steps:
+  - Install all the dev tools you need
+  - Get the Zephyr SDK installed and learn how to work with west, the developer tool orivided by the Operation System Zephyr.
+
+## 03-04-2026
+- Most of my project will now support AI-Agents by using a AGENTS.md file. I uses OpenCode to get it generated. 
+- The readme's got an update by AI. Hope this helps some interested people to learn what I did so far.
+- The OSRE-Engine had issues to generate a cobe. Some triangles were clock-wise indices, so counter-clock-wise. This issue is fixed and
+  I am so happy about that.
+
+## 03-03-2026
+- I found an issue in the LWO-animation evaluation algorithm. Sometimes the calculation which frame of the animation shall be get used was buggy. 
+  Instead of calculating a point in time between the start- and end-timestamp it calculated a point in time before the time-period. This created 
+  an expection because of the used logic based on stl-iterators. The offset got negative, the point in time was before the begin of the used 
+  iterator. And this issue is fixed now.
+
+## 03-02-2026
+- By walking through the open issue of the Asset-Importer-Lib I saw, that the ply loader was not able to import triangle stripes. 
+  Now, this feature is supported and I am really happy to fix this featuere request.
+
+## 02-25-2026
+- Tinyui now supports a basic treeview widget. It is not stable but I made a lot of progress. What is supported so far:
+  - You can generate a tree structure
+  - You ca expand or collapse the Tree
+
+## 02-15-2026
+- The API of tiny-ui will now not require to have the current context managed by its user. This will be managed automatically in the app.
+
 ## 01-14-2026
 - I have finished my first certificate how to use **MCP** with an AI-agent. Nice to see how the USB for LLMs works.
 
