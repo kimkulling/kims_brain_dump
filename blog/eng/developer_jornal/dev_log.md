@@ -1,5 +1,12 @@
 # My developer journal
 
+## 04-16-2026
+- I was able to decouple the backend-code from the fromend-code of the tiny-ui lib.
+- I found a lot of issues using OpenCode in my ui-lib tiny-ui.
+
+## 04-01-2026
+- The input field for the tiny-ui lib is prepared and I am happy aout it.
+
 ## 03-06-2026
 - Today I stared to work with my Nukleus Developer Board with Zephyr. What I did so far were the common first steps:
   - Install all the dev tools you need
