@@ -1,4 +1,9 @@
 # My developer journal
+## 05-01-2026
+- The assimp bugfix release v6.0.5 installer is ready.
+
+## 04-20-2026
+- The assimp bugfix release v6.0.5 is out.
 
 ## 04-16-2026
 - I was able to decouple the backend-code from the fromend-code of the tiny-ui lib.
