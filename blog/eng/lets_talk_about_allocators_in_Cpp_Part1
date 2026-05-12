@@ -1,0 +1,86 @@
+Fast Memory Without the Heap: Building a Stack Allocator in C++
+The default new/delete operators are convenient, but they come with a cost. Every heap allocation involves a system call, internal book-keeping, and potential fragmentation. For performance-critical code like game engines, real-time systems, or tight inner loops, this overhead adds up fast. A stack allocator is one of the simplest tools to eliminate it.
+
+The Core Idea
+A stack allocator pre-allocates a large contiguous block of memory upfront and hands out chunks of it by simply advancing a pointer. There is no free list, no coalescing, no lock contention. 
+
+Deallocation is equally trivial: you reset the pointer to a previously saved position, reclaiming everything allocated since that point in a single step.
+
+class StackAllocator {
+public:
+  using Marker = std::size_t;
+
+  // Will use a preallocated buffer of 1024*1024.
+  StackAllocator() = default;
+
+  // If you want to use your own preallocated buffer size.
+  explicit StackAllocator(std::size_t capacity) :
+      mBuffer(std::make_unique<std::byte[]>(capacity)),
+      mCapacity(capacity),
+      mOffset(0) {
+        // empty
+  }
+
+  // No copying
+  StackAllocator(const StackAllocator &) = delete;
+  StackAllocator &operator(const StackAllocator &) = delete;
+
+  void* allocate(std::size_t size, std::size_t alignment = alignof(std::max_align_t)) {
+     std::size_t aligned = align_up(mOffset, alignment);
+     if (aligned + size > mCapacity)
+         return nullptr;
+     mOffset = aligned + size;
+     return mBuffer.get() + aligned;
+ }
+
+ Marker get_marker() const { 
+     return mOffset; 
+ }
+ 
+ void free_to_marker(Marker marker) { 
+     mOffset = marker; 
+ }
+ 
+ void reset() { 
+     mOffset = 0; 
+ }
+
+private:
+    static std::size_t align_up(std::size_t value, std::size_t alignment) {
+        return (value + alignment - 1) & ~(alignment - 1);
+    }
+
+    std::unique_ptr<std::byte[]> mBuffer{};
+    std::size_t mCapacity{1024*1024};
+    std::size_t mOffset{0};
+};
+Using Markers for Scoped Lifetime
+The marker system is what makes a stack allocator genuinely useful. Save a marker before a logical block of work, do all the allocations you need, then roll back to the marker when the work is done.
+
+StackAllocator arena(1024 * 1024); // 1 MB arena
+auto marker = arena.get_marker();
+
+auto* vertices = static_cast<Vertex*>(arena.allocate(sizeof(Vertex) * 1000));
+auto* indices = static_cast<uint32_t*>(arena.allocate(sizeof(uint32_t) * 3000));
+process_mesh(vertices, indices);
+
+arena.free_to_marker(marker); // reclaim both allocations instantly
+This pattern maps naturally to frame-based work: reset the entire arena at the start of each frame and allocate freely throughout. No destructor calls, no fragmentation, no surprises.
+
+Alignment Matters
+One subtlety that trips up many implementations is alignment. CPUs require that types like float, int32_t, and SIMD vectors be placed at addresses that are multiples of their size. The align_up helper above
+ uses a standard bitmask trick to round the current offset up to the nearest aligned boundary before each allocation. Without this, you get undefined behavior on most architectures and a performance penalty
+ on the rest.
+
+When to Reach for This Tool
+A stack allocator shines when:
+
+Allocations have a clear, nested lifetime (frame data during rendering, request-scoped buffers, parse trees).
+You know an upper bound on memory usage upfront or your memory is limited.
+You want deterministic allocation time with zero fragmentation.
+Allocations are forbitten because of approal-related requirements like an embedded device for functional-safety.
+It falls flat when objects have independent lifetimes that cannot be ordered. For that, a pool allocator or a more general arena is a better fit. We will handle this in another blog post.
+
+Takeaways
+A stack allocator is perhaps 50 lines of code, yet it can replace thousands of heap allocations per second with pointer arithmetic. It is one of the clearest examples of a domain constraint — “these things
+ all die together” — being turned directly into a performance advantage. If your profiler is pointing at memory allocation, this is the first place to look.
