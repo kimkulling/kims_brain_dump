@@ -1,7 +1,20 @@
 # My developer journal
+## 05-20-2026
+- Fix the Legends of War UI in a working state again.
+- Merge new fuzzer usecases
+
+## 05-15-2026
+- Merged a lot of vulnerability fixes
+  
 ## 05-01-2026
 - The assimp bugfix release v6.0.5 installer is ready.
 
+## 04-28-2026
+- TinyUI: Introduce a new concept for dealing with widget handles
+  - Switch from direct ids to auto-generated handles
+  - Adapt the API
+  - Document the API
+ 
 ## 04-20-2026
 - The assimp bugfix release v6.0.5 is out.
 
