@@ -1,13 +1,29 @@
 # My developer journal
+## 06-24-2026
+- I updated the agents-file for my Segfault-project:
+  - More namespaces are now there to scenes, ai and more
+  - I learned a lot about the desired project structure used in the agents-file
+
+## 06-23-2026
+- I started to add a checkbox to my tiny-ui lib
+
+## 06-22-2026
+- I updated my private website. Now my list of projects is more realistic and contains some more stuff I made
+  
+## 06-20-2026
+- I started to write a behavior tree implementation in my Segfault-gameengine experiment
+  - The main focus for this project is to define my first Warlords-close. And for that I will need some game intelligence
+  - Writing the renderer is not so fast as expected. I needed a rest
+
 ## 05-20-2026
-- Fix the Legends of War UI in a working state again.
+- Fix the Legends-of-War UI in a working state again.
 - Merge new fuzzer usecases
 
 ## 05-15-2026
-- Merged a lot of vulnerability fixes
+- Merged a lot of vulnerability fixes for the assimp library, more to come.
   
 ## 05-01-2026
-- The assimp bugfix release v6.0.5 installer is ready.
+- The Assimp bugfix release v6.0.5 installer is ready.
 
 ## 04-28-2026
 - TinyUI: Introduce a new concept for dealing with widget handles
