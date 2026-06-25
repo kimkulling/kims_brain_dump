@@ -1,4 +1,9 @@
 # My developer journal
+## 06-25-2026
+- I have learned a lot about PKI's and the EAST protocol. So if you want to use a PKI for provisioning your IoT-Device
+  or if you have to roll out a new intermediate certificate: I wish you a lot of luck.
+- There is a lot of progress with the mikktshape-support in Asset-Importer-Lib
+
 ## 06-24-2026
 - I updated the agents-file for my Segfault-project:
   - More namespaces are now there to scenes, ai and more
@@ -15,6 +20,10 @@
   - The main focus for this project is to define my first Warlords-close. And for that I will need some game intelligence
   - Writing the renderer is not so fast as expected. I needed a rest
 
+## 06-10-2026
+- I worked on an experimentaöl MCP-service for the Assimp command line tool. My plan is to have this in Mistral as a
+  tool to convert my model data.
+  
 ## 05-20-2026
 - Fix the Legends-of-War UI in a working state again.
 - Merge new fuzzer usecases
