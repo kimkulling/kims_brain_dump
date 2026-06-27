@@ -1,0 +1,139 @@
+Let's talk about allocators in cpp
+
+Pool Allocators: Fast, Fixed-Size Allocation for Performance-Critical Code
+
+The stack allocator we covered in Part 1 is ideal for nested, short-lived allocations. 
+But what if you need to allocate many objects of the same size that live independently? 
+A pool allocator is the answer.
+
+The Core Idea
+A pool allocator pre-allocates a large block of memory and divides it into fixed-size chunks. 
+When you request memory, it hands out the next free chunk in constant time. When you free, it simply 
+marks the chunk as available. No system calls, no fragmentation for same-sized objects.
+
+class PoolAllocator {
+public:
+    PoolAllocator(std::size_t objectSize, std::size_t capacity)
+        : mObjectSize(objectSize),
+          mCapacity(capacity),
+          mBuffer(std::make_unique<std::byte[]>(objectSize * capacity)),
+          mFreeList(nullptr) {
+        // Initialize free list with all chunks
+        for (std::size_t i = 0; i < mCapacity; ++i) {
+            auto* chunk = mBuffer.get() + (i * mObjectSize);
+            *reinterpret_cast<void**>(chunk) = mFreeList;
+            mFreeList = chunk;
+        }
+    }
+
+    void* allocate() {
+        if (mFreeList == nullptr)
+            return nullptr;
+        void* result = mFreeList;
+        mFreeList = *reinterpret_cast<void**>(mFreeList);
+        return result;
+    }
+
+    void deallocate(void* ptr) {
+        *reinterpret_cast<void**>(ptr) = mFreeList;
+        mFreeList = static_cast<std::byte*>(ptr);
+    }
+
+    void reset() {
+        mFreeList = nullptr;
+        for (std::size_t i = 0; i < mCapacity; ++i) {
+            auto* chunk = mBuffer.get() + (i * mObjectSize);
+            *reinterpret_cast<void**>(chunk) = mFreeList;
+            mFreeList = chunk;
+        }
+    }
+
+private:
+    std::size_t mObjectSize;
+    std::size_t mCapacity;
+    std::unique_ptr<std::byte[]> mBuffer;
+    std::byte* mFreeList;
+};
+
+How It Works
+The pool maintains a singly-linked free list through the memory chunks themselves. Each free chunk stores a pointer to the next free chunk. Allocation pops from the list, deallocation pushes back. This gives O(1) allocation and deallocation.
+
+The free list uses the allocated memory itself to store the next pointer when free. This is safe because the memory is unused when free, and we know the size is sufficient (the object size must be at least pointer-sized).
+
+Usage Pattern
+PoolAllocator particlePool(sizeof(Particle), 10000);
+
+// Allocate particles
+Particle* p1 = static_cast<Particle*>(particlePool.allocate());
+Particle* p2 = static_cast<Particle*>(particlePool.allocate());
+// ...
+
+// Deallocate when done
+particlePool.deallocate(p1);
+particlePool.deallocate(p2);
+
+// Or reset all at once
+particlePool.reset();
+
+When to Use a Pool Allocator
+
+Game entities, particles, bullets — objects with identical size and independent lifetimes
+Object pools for game development: enemies, projectiles, particles
+Network packet buffers
+Thread pools (allocating thread stack memory)
+Database connection pools
+
+Benefits
+
+Constant time allocation and deallocation
+No fragmentation for same-sized objects
+No system call overhead after initialization
+Memory reuse is automatic and instantaneous
+Predictable performance
+
+Tradeoffs
+
+Fixed object size — cannot allocate different sizes
+Fixed capacity — cannot grow beyond initial allocation
+Memory is not returned to the system until pool is destroyed
+Wasted memory if object size doesn't align well with typical allocations
+
+Advanced: Polymorphic Pool
+For multiple object types, you can create a polymorphic pool that uses placement new:
+
+template <typename T>
+class TypedPoolAllocator {
+public:
+    TypedPoolAllocator(std::size_t capacity)
+        : mPool(sizeof(T), capacity) {}
+
+    template <typename... Args>
+    T* allocate(Args&&... args) {
+        void* memory = mPool.allocate();
+        return new (memory) T(std::forward<Args>(args)...);
+    }
+
+    void deallocate(T* ptr) {
+        ptr->~T();
+        mPool.deallocate(ptr);
+    }
+
+private:
+    PoolAllocator mPool;
+};
+
+TypedPoolAllocator<Particle> particlePool(10000);
+Particle* p = particlePool.allocate(position, velocity, lifetime);
+particlePool.deallocate(p);
+
+Comparison with Stack Allocator
+
+Stack: LIFO order, nested lifetimes, variable sizes, bulk deallocation
+Pool: Any order, independent lifetimes, fixed size, individual deallocation
+
+Both eliminate system call overhead. Both provide predictable performance. Choose based on your allocation pattern.
+
+Takeaways
+A pool allocator trades flexibility for speed. When you know your object sizes and have a good estimate of maximum count,
+it can eliminate allocation overhead entirely. It's the workhorse of game engines, real-time systems, and any code where object
+churn is high but sizes are uniform.
