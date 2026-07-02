@@ -1,4 +1,8 @@
 # My developer journal
+## 07-02-2026
+- I learned what a parity bit is, hooray!
+- I learned a lot about PHY-Layers for SPE-Interfaces
+
 ## 07-01-2026
 - Hopefully I will be able to fix the mikktshape-PR in the next days. The build is mostly green, but one crash in a saniztizer is still there.
 - I prepared two new demos for the Segfault Engine:
