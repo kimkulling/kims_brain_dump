@@ -1,4 +1,10 @@
 # My developer journal
+## 07-01-2026
+- Hopefully I will be able to fix the mikktshape-PR in the next days. The build is mostly green, but one crash in a saniztizer is still there.
+- I prepared two new demos for the Segfault Engine:
+  - Behavior Tree prototype
+  - Scene Prototype
+
 ## 06-25-2026
 - I have learned a lot about PKI's and the EAST protocol. So if you want to use a PKI for provisioning your IoT-Device
   or if you have to roll out a new intermediate certificate: I wish you a lot of luck.
