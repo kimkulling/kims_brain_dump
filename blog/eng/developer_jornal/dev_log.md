@@ -2,6 +2,9 @@
 ## 07-14-2026
 - I wrote a small tool to generate html-blogposts out of markdown files.
 
+## 07-10-2026
+- I was able to merge some older assimp PRs, which were pending for some months.
+
 ## 07-02-2026
 - I learned what a parity bit is, hooray!
 - I learned a lot about PHY-Layers for SPE-Interfaces
