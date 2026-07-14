@@ -1,4 +1,7 @@
 # My developer journal
+## 07-14-2026
+- I wrote a small tool to generate html-blogposts out of markdown files.
+
 ## 07-02-2026
 - I learned what a parity bit is, hooray!
 - I learned a lot about PHY-Layers for SPE-Interfaces
