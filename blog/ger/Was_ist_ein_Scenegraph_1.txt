@@ -1,0 +1,240 @@
+   Was ist ein Scenegraph
+   ------------------------
+
+Wenn man sich mit 3D-Grafik beschäftigt, wird man irgendwann mit der Tatsache auseinandersetzen müssen,
+die zu renderndern Daten zu verwalten und Abhängigkiten untereinander abbilden zu wollen. Hat man nun 
+die komplette Szene in einem Vertex-Array, wird es schwer bis unmöglich, die jeweiligen Relationen der
+einzelnen Vertices zu verwalten und entsprechend zu modifizieren. Benutzt man statt dessen verschiedene
+Vertexbuffer beziehungsweise Renderobjekte (gemäss dem Motto, Teile und herrsche), steht man vor dem 
+Problem, die Abhängigkeiten der verschiedenen Objekte zu verwalten. Aber glücklicherweise gibt es bereits
+einige fertige Algorithmen und Datentypen.
+
+ Graphen und Bäume:
+--------------------
+Graphen stellen einen fundamentalen Datentyp in der Informatik dar. Eine spezielle Form des Graphen ist
+der Baum: 
+
+   Ebene 0               Root
+                         /  \
+   Ebene 1           Child Child
+                     / | \
+   Ebene 2          C  C  C
+
+
+Es gibt dabei einen Rootnode (Wurzel), dieser hat verschiedene Childnodes. Jeder Childnode hat mindestens 
+einen Parentnode und kann verschiedene Childnodes haben. Wenn es jeweils pro Node nur höchstens 2 Nodes 
+gibt, bzeichnet man das Konstrukt als ein binären Baum. Die jeweiligen Childnodes haben in einem normalen
+Baum nur Beziehungen zum Parent und zu den jeweiligen Childnodes, Graphen können aber auch geschlossene
+Gebilde sein:
+
+   Ebene 0              Root
+                        /  \
+   Ebene 1          Child-Child
+                    / | \
+   Ebene 2         C  C  C
+
+
+In der Ebene 1 gibt es in diesem Beispiel eine Relation zwischen den beiden Childnodes, die den Rootnode
+als Parent haben. In diesem Text möchte ich diesen Sonderfall aber der Einfachheit halber unberücksichtigt 
+lassen. 
+Möchte man nun alle im Baum verwalteten Childs durchlaufen, nennt man diesen Vorgang traversieren. Mittels 
+einer doppelt verketteten Liste lässt sich dieser Vorgang relativ schnell implementieren: 
+
+typedef list<Node> Nodes
+class Node
+{
+ protected:
+    Nodes m_lNodeList;
+
+ public:
+    // Konstruktor / Destruktor
+    Node();
+    ~Node();
+
+     // Durchlaufe Liste und aktualisiere Daten
+     virtual void Update();
+
+     // Adde ChildNode
+     void Add(Node *pChild);     
+
+     // Gebe Speicher des Nodes frei
+     void Release(void) {delete this;};
+  
+     // Gebe Childliste frei
+     void Destroy();
+}
+
+...
+// Durchlaufe Child-Liste
+void Node::Update(void)
+{
+  Nodes::iterator it;
+  for (it = m_NodeList.begin(); it != m_NodeList.end(); it++) {
+    // Tu was mit den Daten
+  }
+}
+
+// Füge Childs hinzu
+void Node::Add(Node pChild)
+{
+  ...
+  m_lNodeList.push_back(pChild);
+  ...
+}
+
+// Release Childliste
+void Node::Destroy()
+{
+  Nodes::iterator it;
+  for (it = m_NodeList.begin(); it != m_NodeList.end(); it++) {
+    this->Release();
+  }
+}
+
+Nodes kann man schnell mittels Node::Add(...) zur Liste hintzufügen, Update kann man zu modifizieren der Daten im
+Node benutzen, Destroy gibt die Childliste wieder fre. Nun stellt sich die Frage, was man alles mit dieser Liste 
+verwalten möchte. 
+
+
+ Idee des Scenegraphen: Beispiel Geometrie-Hierarchie
+------------------------------------------------------
+Ein SceneGraph wird benutzt, um die verschiedenen Beziehungen der Objekte untereinander zu verwalten. Diese werden
+in Form von Bäumen dargestellt. Der Scenegraph verwaltet diese.
+Wozu treibt man nun den Aufwand. Nehmen wir als Beispiel einen Tisch. Dieser steht auf einem Fussboden (welch 
+Wunder :-)), auf dem tisch steht eine Lampe. Verschiebt man nun den Tisch, interessiert das die Bewegung des Fuss-
+bodens relativ wenig, die Lampe jedoch wird diese Verschiebung mitmachen, schliesslich steht sie auf dem Tisch.
+Dementsprechend kann man aus diesem Zusammenhang einen Baum entwickeln: 
+
+                       Boden
+                       /  \
+                    Stuhl Tisch
+                           |
+                          Lampe
+
+Verschiebt man den Tisch, kann mann die Lampe gleich mit bewegen:
+  
+  - Verschiebe Tisch
+        \
+       Verschiebe Lampe
+
+Mittels des erstellten  Nodes kann man zwar eine Liste durchlaufen, allerdings muss die Update-Methode noch
+ein wenig modifiziert werden. Praktischereweise ist diese auch gleich als virtual dek´lariert worden, so dass 
+man einen Geometrie-Node erstellen kann.
+
+ Kurzform des Codes:
+
+GeoNode : public Node
+{
+ private:
+    Vector3f     *m_pTrans;
+    Vector3f     *m_pRot;
+    VertexBuffer *m_pVB;
+
+ public:
+  // Methoden zum Setzen von Rotationen und Translationen
+  void SetTranslate(float x, float y, float z);
+  void SetRotate(float ex, float ey, float ez);
+  ...
+  void Update();
+  ...
+};
+
+void GeoNode::Update(void)
+{
+   // Transation + Rotation
+   glTranslate(m_pTrans->GetX(), m_pTrans->getY(), m_pTrans->GetZ());
+   glRotate(m_pRot->GetX(); m_pRot->GetY(), m_pRot->GetZ());
+   
+
+   // Durchlaufe alle Childs
+   Node::Update();
+}
+
+Man kann das natürlich auch benutzen, um weitere Rotationen etc. zu erstellen, einen guten Artikel zu diesem Thema 
+gibt es unter der URL [1].
+
+
+ Erweiterung des Konzeptes
+---------------------------
+Das beschriebene Verfahren kann auch auf andere Zusammenhänge angewendet werden. In einer Game-Library will man 
+beispielsweise Dinge wie physikalische Zusammenhänge verwalten. Wenn man sich ein Rad eines Autos ansieht, ist dieses
+über die Achsen mit dem Rest des Autos verbunden. Die Achsen wiederum werden über Stossdämpfer an die Karosserie 
+angebunden. Die Stossdämpfer übertragen aber nicht die komplette Verschiebungen, sondern dämpfen einen Teil weg. Diese
+Dämpfung kann man vereinfacht (normal funktionieren Dämpfungen etwas anders) duchr eine Federkonstante ausdrücken:
+
+   F = D x s
+
+   F ... Kraft
+   D ... Federkonstante
+   s ... Weg
+
+Nehmen wir an, die Federkonstante hat den Wert 10 [N/m], und wir nehmen die Kraft als Relativverschiebung abhängig von 
+der letzten Verschiebung (sagen wir 1 Einheit), so könnte man die Verschiebung um 1 in der Wirkungsrichtung zurückrechnen.
+Drücken wir diese Zusammenhänge in Graphen aus, bekommen wir 2 verschiedene Graphen:
+
+ Geobau:
+  
+                    Auto-Karrosserie
+                     /           \
+                  Achse         Achse 
+                  hinten        vorn
+                  / \           / \
+                 R1 R2         R3 R4
+
+ Physikbaum (vereinfach für hintere Acshem, ASCII-Kunst ist beschränkt ;-)):
+
+                   Auto-Karosserie:
+                    /           \
+                  Feder1       Feder 2
+                  (D = 2)      (D = 4)
+    
+Nach dem Durchlaufen wird die Relativverschiebung in Wirkungsrichtung der Feder 1 von 2 Einheiten bestimmt. Die 
+dämpfende Eigenschaft ermittelt eine Rückstellung von:
+  
+  2 = 2 x s
+
+-> s = 1
+
+Die Achse muss um 1 EInheit zurück bewegt werden.
+Diese Zusammenhänge kann man genau wie die Geo-Liste traversieren, um die physikalischen Relationen abzuarbeiten. 
+Es ist sicher auch möglich, diese beiden Bäume in einem Durchgang zu traversieren, jedoch ist das eine Optimierung, 
+die dem werten Leser das Verstehen der Zusammenhänge etwas erschwert. Ausserdem können die physikalischen Zusammenhänge 
+unabhängig vom Geometriebaum definiert sein, man denke beispielsweise an einen Magneten und einen Spieler, der eine
+metallende Rüstung trägt. Zwar gibt es eine Physikalische Abhängigkeit zwischen Magneten und dem Metall der Rüstung,
+jedoch sind keine geometrischen Abhängigkeiten vorhanden.
+
+
+      Das Rendern
+     -------------
+Abschliessend wird aus diesen ermittelten Verschiebungen und Verdrehungen das komplette Modell in die Renderpipeline 
+gestellt und gerendert. Dabei erstellt man sich wiederum einen Graphen, der die Sichtbarkeitsbeziehungen beinhaltet.
+Schliesslich muss nicht jeder Node gerendert werden (wenn er ausserhalb des Frustums ist, zum Beipiel), sehr wohl
+jedoch müssen alle translationen durchgeführt werden, um das komplette Modell in sich konsistent zu halten.
+
+Diese 3 Graphen beinhalten jeweils verschiedene Nodes, die die entsprechenden Informationen der verschiedenen Bäume
+repräsentieren. Damit der Anwender keinen Unsinn mit den Nodes anstellen kann (Geometrienode sollte keine physikalischen
+Grössen repräsentieren), sollt es verschiedene Nodeklassen für die Bäume geben.
+Der Scenegraph beinhaltet diese 
+Graphen, traversiert sie und erstellt so aus geometrischen und physikalischen Zusammenhängen den Rendergraph, der 
+dann an den Renderer weitergegeben wird. Dieses Designpattern wird als Kompositum bezeichnet, eine recht gute 
+Einführung kann man in [2] finden.
+
+Man könnte nun das Gefühl haben, dass die Daten redundant in den verschiedenen Graphen vorhanden sind. Allerdings ist
+das nicht so. Erinnern wir uns an den GeoNode, er beinhaltete einen Pointer auf den zugehörigen VertexBuffer. Es werden 
+die Daten gemäss der Hierarchie aktualisiert, damit sie dann gerendert werden können.
+
+Das ist nicht die einzig richtige Variante, Szenen zu verwalten. Nachbearbeitungen, Kommentare und Erweiterungen bzw. 
+verbesserte Varianten bitte direkt nach [3] oder an mich. Dazu sind unter [4] und folgend noch einige weiterführende 
+Links zu Papern und fertigen SceneGraphen aufgeführt.
+
+  MfG Kimmi
+
+Meine Email: sir_kimmi@gmx.de
+HP         : http://www.sir-kimmi.de
+
+[1] http://www.gamedev.net/reference/articles/article2028.asp
+[2] Entwurfsmuster, Erich Gamma, ...
+[3] http://www.zfx.info
+[4] http://www.nist.gov/dads/HTML/directAcycGraph.html
+[5] http://www.r3vis.com/Downloads/SceneGraphPanelProposal-Siggraph99.pdf
+[6] http://www4.tomshardware.com/column/20000110/index.html
