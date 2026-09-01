@@ -1,4 +1,15 @@
 # My developer journal
+## 08-15-2026
+- Cleanup of merged PRs in Assimp
+  
+## 08-05-2026
+- Merged a lot of PR bugfixes
+  
+## 08-01-2026
+- Update Segfault render concept
+  - Use frame begin/end semantic and submit it to the framebuffer
+  - Todo: Make this workable
+    
 ## 07-14-2026
 - I wrote a small tool to generate html-blogposts out of markdown files.
 
