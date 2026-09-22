@@ -1,4 +1,20 @@
 # My developer journal
+## 09-22-2026
+- The hello-world-example of the segfault engine shows how to use the add meshes semantic.
+- I merged a lot of bugfixes in assimp
+  
+## 09-21-2026
+- I merged a lot of bugfixes in assimp
+- I just added a setup-page to my flutter app. The app shall ehlp to manage my private revipes for cooking
+
+## 09-19-2026
+- I merged a lot of bugfixes in assimp
+- Segfault now supports a base method to add user-specific render objects.
+
+## 09-18-2026
+- I vibecoded a prototype for a new app with flutter.
+- Most stuff worked out of the box. But doing database acces needed my personal skillset
+
 ## 08-15-2026
 - Cleanup of merged PRs in Assimp
   
